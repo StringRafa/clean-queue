@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "50338867-59f9-4e11-92b2-eb76b42071b9",
+		"name": "Clean Queue",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18219324"
+	},
+	"item": [
+		{
+			"name": "Queue-Cleaning",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"queueName\": [\r\n        \"nameQueue\",\r\n        \"myQueue\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8089/queue-cleaning",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"queue-cleaning"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
