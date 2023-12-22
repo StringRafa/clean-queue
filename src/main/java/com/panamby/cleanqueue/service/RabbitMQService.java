@@ -1,5 +1,6 @@
 package com.panamby.cleanqueue.service;
 
+import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,18 @@ public class RabbitMQService {
     	
     	for (String nameQueue : nameQueueObject.getQueueName()) {
         	
-        	purgeQueueMessage = amqpAdmin.purgeQueue(nameQueue);
-        	countMessagesPurged += purgeQueueMessage;
-            
-        	log.info(String.format("%s messages successfully deleted from the queue %s", purgeQueueMessage, nameQueue));
+        	try {
+        		
+				purgeQueueMessage = amqpAdmin.purgeQueue(nameQueue);
+	        	
+	        	countMessagesPurged += purgeQueueMessage;
+	            
+	        	log.info(String.format("%s messages successfully deleted from the queue %s", purgeQueueMessage, nameQueue));
+			} catch (AmqpException e) {
+				
+				log.error(String.format("Queue %s not found. ERROR_MESSAGE [%s]",
+						nameQueue, e.getMessage()), e);
+			}
 		}
         
     	log.info(String.format("Queue Cleaning Service finished. QUEUES [%s] - MESSAGES_PURGED [%s]",
