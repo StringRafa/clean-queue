@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.panamby.cleanqueue.model.CleanQueueResponse;
 import com.panamby.cleanqueue.model.QueueName;
 import com.panamby.cleanqueue.service.RabbitMQService;
 
@@ -19,7 +20,7 @@ public class RabbitMQController {
 	private RabbitMQService rabbitMQService;
 
     @PostMapping("/queue-cleaning")
-    public ResponseEntity<String> queueCleaning(@RequestBody QueueName nameQueue) {
+    public ResponseEntity<CleanQueueResponse> queueCleaning(@RequestBody QueueName nameQueue) {
         
     	log.info(String.format("Queue Cleaning Controller started. QUEUE [%s]", nameQueue));
     	
